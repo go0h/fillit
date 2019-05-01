@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:43:06 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 18:21:55 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:45:04 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,12 @@ int		valid_one_tet(char *buf)
 	if (!(tab = ft_strsplit(buf, '\n')))
 		return (0);
 	if (!(basic_check(tab)) || !(figure_check(tab)))
+	{
+		ft_free_arr(tab);
 		return (0);
+	}
 	tab = figure_trim(tab);
-	//ft_print_figure(tab);
+	ft_print_figure(tab);
 	ft_free_arr(tab);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:44:25 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 18:21:59 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:44:39 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+
+typedef struct	s_list
+{
+	char		**figure;
+	int			size_x;
+	int			size_y;
+}				t_list;
 
 //буфер на всякий случай
 # define BUFF_SIZE 4096
