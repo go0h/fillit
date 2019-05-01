@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:44:25 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 18:44:39 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 19:55:03 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-typedef struct	s_list
+typedef struct	s_tetramino
 {
-	char		**figure;
-	int			size_x;
-	int			size_y;
-}				t_list;
+	char				**figure;
+	int					size_x;
+	int					size_y;
+	struct s_tetramino	*next;
+}				t_tetramino;
 
 //буфер на всякий случай
 # define BUFF_SIZE 4096
@@ -36,16 +37,16 @@ typedef struct	s_list
 //функция читает из файла по одной карте, проверяет на валидность тетрамино.
 //(по идеее сюда нужно добавить формирование связного списка из валидных тетрамино)
 //если один невалидный зафришить все.
-//Возвращает 1 в случае валидной карты, иначе 0
-int		read_file(char *filename);
+//Возвращает связанный список в случае валидных карт, иначе NULL
+t_tetramino	*read_file(char *filename);
 
 //функция для валидации одной карты с тетрамино
-//Возвращает 1 в случае валидной карты, иначе 0
-int		valid_one_tet(char *one_read_map);
+//Возвращает фигуру в случае валидной карты, иначе NULL
+char		**valid_one_tet(char *one_read_map);
 
 //говнофункция. считает количество строк, количество символов в строке и 
 //количество '#' в массиве. Возвращает 1 в случае валидной карты, иначе 0
-int		basic_check(char **tab);
+int			basic_check(char **tab);
 
 //говнофункция-2. проверяет правильность фигуры тетромино
 //должно быть 4 связанных '#'
@@ -78,8 +79,23 @@ int		last_x_y(char **tab, char c);
 //             #
 char	**figure_trim(char **tab);
 
+
+//создаем новый лист, куда передаем обрезанную(!) фигуру
+//и размеры массива
+t_tetramino	*ft_newlist(char **figure);
+
+//добавляет в конец списка новый лист с переданными параметрами
+void		ft_listadd(t_tetramino **begin, char **figure);
+
+//очищает весь список, в т.ч. содержимое "figure"
+void		ft_dellist(t_tetramino **begin);
+
+
+//!!ФУНКЦИИ ДЛЯ ОТЛАДКИ. ПЕРЕД СДАЧЕЙ УДАЛИТЬ
 //функция для печати двумерного массива
-//НАДО БУДЕТ УДАЛИТЬ
 void	ft_print_figure(char **figure);	
+
+//функция для итерации по списку и печaти фигур с размерами
+void	ft_print_list(t_tetramino **begin);
 
 #endif

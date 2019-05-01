@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:56:37 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 13:12:49 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 20:31:35 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		main(int argc, char **argv)
 {
-	int n;
-	int	i;
+	int				i;
+	t_tetramino		*list;
 
 	/*на время тестирования
 	 * if (argc != 2)
@@ -26,12 +26,16 @@ int		main(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		n = read_file(argv[i]);
-		if (n)
+		list = read_file(argv[i]);
+		if (list)
+		{
+			ft_print_list(&list);
 			printf("file %s: valid tetramino\n", argv[i]);
+		}
 		else
 			printf("file %s: invalid tetramino\n", argv[i]);
 		++i;
+		ft_dellist(&list);
 	}
 	return (0);
 }

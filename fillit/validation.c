@@ -6,30 +6,58 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:43:06 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 18:45:04 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 20:27:07 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetramino.h"
 
-int		read_file(char *filename)
+t_tetramino		*read_file(char *filename)
 {
-	int		fd;
-	int		n;
-	char	buf[ONE_TET];
+	int			fd;
+	int			n;
+	char		buf[ONE_TET];
+	char		**figure;
+	t_tetramino	*list;
 
+	list = NULL;
 	if ((fd = open(filename, O_RDONLY)) < 0)
-		return (-1);
+		return (NULL);
 	while ((n = read(fd, buf, ONE_TET)) > 0)
 	{
 		buf[n] = '\0';
-		if (!valid_one_tet(buf))
-			return (0);
+		if (!(figure = valid_one_tet(buf)))
+		{
+			ft_dellist(&list);
+			return (NULL);
+		}
+		ft_listadd(&list, figure);
+		if (!(list))
+		{
+			ft_dellist(&list);
+			return (NULL);
+		}
 	}
-	return (1);
+	return (list);
 }
 
-int		basic_check(char **tab)
+char			**valid_one_tet(char *buf)
+{
+	char	**tab;
+
+	if (!(tab = ft_strsplit(buf, '\n')))
+		return (NULL);
+	if (!(basic_check(tab)) || !(figure_check(tab)))
+	{
+		ft_free_arr(tab);
+		return (NULL);
+	}
+	if (!(tab = figure_trim(tab)))
+		return (NULL);	
+	return (tab);
+}
+
+int				basic_check(char **tab)
 {
 	int i;
 	int j;
@@ -57,24 +85,7 @@ int		basic_check(char **tab)
 	return (count != 4 ? 0 : 1);
 }
 
-int		valid_one_tet(char *buf)
-{
-	char	**tab;
-
-	if (!(tab = ft_strsplit(buf, '\n')))
-		return (0);
-	if (!(basic_check(tab)) || !(figure_check(tab)))
-	{
-		ft_free_arr(tab);
-		return (0);
-	}
-	tab = figure_trim(tab);
-	ft_print_figure(tab);
-	ft_free_arr(tab);
-	return (1);
-}
-
-int		figure_check(char **tab)
+int				figure_check(char **tab)
 {
 	int i;
 	int j;

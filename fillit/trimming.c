@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 15:59:07 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 18:41:31 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 20:13:47 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,4 @@ void	ft_print_figure(char **figure)
 		ft_putendl(figure[i]);
 		++i;
 	}
-	ft_putchar('\n');
 }
