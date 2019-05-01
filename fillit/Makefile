@@ -6,7 +6,7 @@
 #    By: astripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:19:04 by astripeb          #+#    #+#              #
-#    Updated: 2019/05/01 11:25:01 by astripeb         ###   ########.fr        #
+#    Updated: 2019/05/01 16:52:00 by astripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ bin:
 	@$(CC) $(CFLAGS) -c $(SOURCES)
 
 test:
-	$(CC) $(CFLAGS) main.c validation.c -L../libft/ -lft -o valid
+	$(CC) $(CFLAGS) main.c validation.c trimming.c -L../libft/ -lft -o valid
 
 $(NAME):
 	@$(CC) $(CFLAGS) -o $(NAME)

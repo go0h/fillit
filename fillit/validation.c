@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:43:06 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 13:48:22 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:21:55 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		read_file(char *filename)
 	return (1);
 }
 
-int	 basic_check(char **tab)
+int		basic_check(char **tab)
 {
 	int i;
 	int j;
@@ -44,12 +44,14 @@ int	 basic_check(char **tab)
 		j = 0;
 		while (tab[i][j] != '\0')
 		{
-			if (j > 3 || tab[i][j] != '#' || tab[i][j] != '.')
+			if (j > 3 || (tab[i][j] != '#' && tab[i][j] != '.'))
 				return (0);
 			if (tab[i][j] == '#')
 				++count;
 			++j;
 		}
+		if (j != 4)
+			return (0);
 		++i;
 	}
 	return (count != 4 ? 0 : 1);
@@ -58,19 +60,14 @@ int	 basic_check(char **tab)
 int		valid_one_tet(char *buf)
 {
 	char	**tab;
-	int		i;
 
 	if (!(tab = ft_strsplit(buf, '\n')))
 		return (0);
 	if (!(basic_check(tab)) || !(figure_check(tab)))
 		return (0);
-	i = 0;
-	while (tab[i])
-	{
-	//	printf("%s\n", tab[i]);
-		++i;
-	}
-	//printf("\n");
+	tab = figure_trim(tab);
+	//ft_print_figure(tab);
+	ft_free_arr(tab);
 	return (1);
 }
 
@@ -87,17 +84,14 @@ int		figure_check(char **tab)
 		j = 0;
 		while (tab[i][j] != '\0')
 		{
-			if (tab[i][j] == '#')
-			{
-				if (i > 0 && tab[i - 1][j] == '#')
-				   ++count;
-				if (i < 3 && tab[i + 1][j] == '#')
-					++count;
-				if (j > 0 && tab[i][j - 1] == '#')
-					++count;
-				if (j < 3 && tab[i][j + 1] == '#')
-					++count;
-			}
+			if (i > 0 && tab[i][j] == '#' && tab[i - 1][j] == '#')
+				++count;
+			if (i < 3 && tab[i][j] == '#' && tab[i + 1][j] == '#')
+				++count;
+			if (j > 0 && tab[i][j] == '#' && tab[i][j - 1] == '#')
+				++count;
+			if (j < 3 && tab[i][j] == '#' && tab[i][j + 1] == '#')
+				++count;
 			++j;
 		}
 		++i;
