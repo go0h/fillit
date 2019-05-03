@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_generation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/01 10:56:37 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/03 22:15:40 by astripeb         ###   ########.fr       */
+/*   Created: 2019/05/03 19:20:56 by astripeb          #+#    #+#             */
+/*   Updated: 2019/05/03 21:04:51 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetramino.h"
 
-int		main(int argc, char **argv)
+int		ft_sqr(int	nbr)
 {
-	int				i;
-	t_tetramino		*list;
+	int		n;
 
-	/*на время тестирования
-	 * if (argc != 2)
+	n = nbr / 2;
+	while (n)
 	{
-		ft_putendl("usage: ./fillit source_file");
-		return (0);
-	}*/
-	i = 1;
-	while (i < argc)
+		if (n * n <= nbr)
+			return (n);
+		--n;
+	}
+	return (0);
+}
+
+char	**ft_create_map(int side)
+{
+	char	**tet;
+	int		i;
+
+	tet = (char**)malloc(sizeof(char*) * side + 1);
+	if (!tet)
+		return (NULL);
+	i = 0;
+	while (i < side)
 	{
-		//printf("%s\n", argv[i]);
-		list = read_file(argv[i]);
-		if (list)
-		{
-			ft_print_list(&list);
-		}
-		else
-			printf("file %s: invalid tetramino\n", argv[i]);
+		tet[i] = ft_strnew(side);
+		if (!tet[i])
+			ft_free_arr(tet);
+		ft_memset(tet[i], 46, (size_t)side);
 		++i;
 	}
-	ft_dellist(&list);
-	return (0);
+	tet[i] = NULL;
+	return (tet);
 }

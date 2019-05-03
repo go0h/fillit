@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:44:25 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/01 19:55:03 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/03 22:11:02 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct	s_tetramino
 {
 	char				**figure;
+	char				octet;
 	int					size_x;
 	int					size_y;
 	struct s_tetramino	*next;
@@ -90,6 +91,25 @@ void		ft_listadd(t_tetramino **begin, char **figure);
 //очищает весь список, в т.ч. содержимое "figure"
 void		ft_dellist(t_tetramino **begin);
 
+//проходит по списку и изменяет у figure символы '#'
+//на символы алфавита (для первого элемента 'A', для второго 'B')
+void		ft_list_alpha(t_tetramino *begin);
+
+//считает число поступивших тетрамино 
+int			count_tetramino(t_tetramino *begin);
+
+//преобразует двумерный массив тетрамино
+//в char например
+//##   преобразуется в 0011 0011
+// ##  
+char		tet_to_char(char **tet);
+
+//вычисляет квадратный корень из числа
+//возвращает ближайшее меньшее
+int			ft_sqr(int nbr);
+
+//создает двумерный массив и заполняет его "."
+char		**ft_create_map(int side);
 
 //!!ФУНКЦИИ ДЛЯ ОТЛАДКИ. ПЕРЕД СДАЧЕЙ УДАЛИТЬ
 //функция для печати двумерного массива
@@ -97,5 +117,8 @@ void	ft_print_figure(char **figure);
 
 //функция для итерации по списку и печaти фигур с размерами
 void	ft_print_list(t_tetramino **begin);
+
+//функция для печати октета
+void	print_octet(char c);
 
 #endif
