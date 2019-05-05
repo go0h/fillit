@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:43:06 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/03 22:12:30 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/05 12:40:55 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_tetramino		*read_file(char *filename)
 	char		**figure;
 	t_tetramino	*list;
 
+	list = NULL;
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (NULL);
 	while ((n = read(fd, buf, ONE_TET)) > 0)
@@ -37,7 +38,6 @@ t_tetramino		*read_file(char *filename)
 			return (NULL);
 		}
 	}
-	ft_list_alpha(list);
 	return (list);
 }
 
@@ -53,7 +53,7 @@ char			**valid_one_tet(char *buf)
 		return (NULL);
 	}
 	if (!(tab = figure_trim(tab)))
-		return (NULL);	
+		return (NULL);
 	return (tab);
 }
 

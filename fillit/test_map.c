@@ -1,48 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tet_to_char.c                                      :+:      :+:    :+:   */
+/*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/03 17:43:16 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 12:42:23 by astripeb         ###   ########.fr       */
+/*   Created: 2019/05/05 13:12:04 by astripeb          #+#    #+#             */
+/*   Updated: 2019/05/05 13:42:48 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tetramino.h"
+#include <stdio.h>
 
-char	tet_to_char(char **tet)
+int		main(void)
 {
-	char	c;
+	long long map[64] = {0};
+	char	fig[4] = {57, 53, 29, 0};
 	int		i;
 	int		j;
 
-	c = 0;
 	i = 0;
-	while (tet[i])
+	while (i < 3)
 	{
 		j = 0;
-		while (tet[i][j])
+		while (j < 64)
 		{
-			if (tet[i][j] == '#')
-				c |= 1;
-			c <<= 1;
-			++j;
-		}
-		++i;
-	}
-	return (c >> 1);
-}
+			if ((map[j] >> (64 - j)) ^ fig[j] != fig)
+			{
 
-void	print_octet(char c)
-{
-	printf("%d", (c >> 7) & 1);
-	printf("%d", (c >> 6) & 1);
-	printf("%d", (c >> 5) & 1);
-	printf("%d ", (c >> 4) & 1);
-	printf("%d", (c >> 3) & 1);
-	printf("%d", (c >> 2) & 1);
-	printf("%d", (c >> 1) & 1);
-	printf("%d\n", (c >> 0) & 1);
+			}
+		}
+	}
 }
