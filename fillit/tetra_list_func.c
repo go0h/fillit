@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 18:50:13 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 13:00:17 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/06 22:32:26 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ t_tetramino		*ft_newlist(char **figure)
 	return (new_list);
 }
 
-void			ft_listadd(t_tetramino **begin, char **figure)
+void			ft_listadd(t_tetramino **begin, t_tetramino *new)
 {
 	t_tetramino *temp;
-	
-	if (!*begin)
-		*begin = ft_newlist(figure);
-	else
+	if (new)
 	{
-		temp = *begin;
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = ft_newlist(figure);
+		if (!*begin)
+			*begin = new;
+		else
+		{
+			temp = *begin;
+			while (temp->next != NULL)
+				temp = temp->next;
+			temp->next = new;
+		}
 	}
 }
 

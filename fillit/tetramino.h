@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:44:25 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 17:17:12 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/06 23:30:09 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ char	**figure_trim(char **tab);
 //и размеры массива
 t_tetramino	*ft_newlist(char **figure);
 
-//добавляет в конец списка новый лист с переданными параметрами
-void		ft_listadd(t_tetramino **begin, char **figure);
+//добавляет в конец списка новый лист
+void		ft_listadd(t_tetramino **begin, t_tetramino *new_list);
 
 //очищает весь список, в т.ч. содержимое "figure"
 void		ft_dellist(t_tetramino **begin);

@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:43:06 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 12:40:55 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/06 23:40:43 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,25 @@ t_tetramino		*read_file(char *filename)
 	int			fd;
 	int			n;
 	char		buf[ONE_TET];
-	char		**figure;
-	t_tetramino	*list;
+	t_tetramino	*begin;
+	t_tetramino	*cur_list;
 
-	list = NULL;
+	begin = NULL;
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		return (NULL);
 	while ((n = read(fd, buf, ONE_TET)) > 0)
 	{
 		buf[n] = '\0';
-		if (!(figure = valid_one_tet(buf)))
-		{
-			ft_dellist(&list);
-			return (NULL);
-		}
-		ft_listadd(&list, figure);
-		if (!(list))
-		{
-			ft_dellist(&list);
-			return (NULL);
-		}
+		if (*buf == '\n' || !(cur_list = ft_newlist(valid_one_tet(buf))))
+			break ;
+		ft_listadd(&begin, cur_list);
 	}
-	return (list);
+	if (n != 0 || buf[ONE_TET - 1] == '\n')
+	{
+		ft_dellist(&begin);
+		return (NULL);
+	}
+	return (begin);
 }
 
 char			**valid_one_tet(char *buf)
