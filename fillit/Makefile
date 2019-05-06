@@ -14,7 +14,9 @@ NAME = fillit
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+LIBFT_PATH = ../libft
+
+CFLAGS = -Wall -Wextra -Werror -I . -I $(LIBFT_PATH)
 
 OBJ = main.o tetra_list_func.o map_generation.o validation.o\
 	  trimming.o tet_to_char.o algorithm.o
@@ -29,7 +31,7 @@ bin:
 
 $(NAME):
 	@$(CC) $(CFLAGS) -c $(SOURCES)
-	@$(CC) $(CFLAGS) $(OBJ) -L../libft/ -lft -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
 
 clean:
 	@rm -f $(OBJ)

@@ -17,7 +17,7 @@
 # include <sys/uio.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "libft.h"
 
 typedef struct	s_tetramino
 {
