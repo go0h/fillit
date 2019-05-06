@@ -17,6 +17,7 @@ int		ft_tetra_square(t_tetramino *tet)
 	int		side;
 	char	**map;
 	
+	map = NULL;
 	ft_list_alpha(tet);
 	//вычисляем для начала наименьший возможный квадрат	
 	//в зависимости от числа тетрамино

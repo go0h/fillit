@@ -15,15 +15,18 @@
 int		main(int argc, char **argv)
 {
 	t_tetramino		*list;
-
+	
 	if (argc != 2)
 	{
 		ft_putendl("usage: ./fillit source_file");
 		return (0);
 	}
-	if (!(list = read_file(argv[1])))
-		ft_putendl("error");
-	ft_tetra_square(list);
-	ft_dellist(&list);
+	if ((list = read_file(argv[1])))
+	{
+		ft_tetra_square(list);
+		ft_dellist(&list);
+		return (0);
+	}
+	ft_putendl("error");
 	return (0);
 }

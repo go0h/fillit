@@ -31,7 +31,7 @@ char	**ft_create_map(int side)
 	char	**tet;
 	int		i;
 
-	tet = (char**)malloc(sizeof(char*) * side + 1);
+	tet = (char**)malloc(sizeof(char*) * (side + 1));
 	if (!tet)
 		return (NULL);
 	i = 0;
