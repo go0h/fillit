@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:15:19 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/08 15:06:40 by pcredibl         ###   ########.fr       */
+/*   Updated: 2019/05/08 16:54:58 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,17 @@ int		ft_tetra_square(t_tetramino *tet)
 
 	map = NULL;
 	ft_list_alpha(tet);
-	//вычисляем для начала наименьший возможный квадрат	
-	//в зависимости от числа тетрамино
 	side = ft_sqr(4 * count_tetramino(tet));
-	//запускаем цикл пока не получится уместить
-	//все тетрамино в квадрат
 	while (1)
 	{
-		//создаем карту со стороной side
 		if (!(map = ft_create_map(side)))
 			return (0);
-		//тут запускаем рекурсивную фунцию,
-		//которая перебирает варианты размещения тетрамино
 		if (ft_tetramino(tet, map) == 1)
 		{
 			ft_print_figure(map);
 			ft_free_arr(map);
 			break ;
 		}
-		//если не один вариант не подходит увеличиваем размер карты
 		ft_free_arr(map);
 		++side;
 	}
@@ -57,14 +49,9 @@ int		ft_tetramino(t_tetramino *tet, char **map)
 		{
 			if (ft_try_on_tet(map, tet->figure, i, j))
 			{
-				//ft_print_figure(map);
 				ft_set_on_map(map, tet->figure, i, j);
 				if (!tet->next || ft_tetramino(tet->next, map) == 1)
-				{
-					tet->x = j;
-					tet->y = i;
 					return (1);
-				}
 				ft_remove_from_map(map, tet->figure, i, j);
 			}
 			++j;

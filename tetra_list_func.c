@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 18:50:13 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/08 15:03:24 by pcredibl         ###   ########.fr       */
+/*   Updated: 2019/05/08 16:58:52 by astripeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ t_tetramino		*ft_newlist(char **figure)
 	if (!(new_list = (t_tetramino*)malloc(sizeof(t_tetramino))))
 		return (NULL);
 	new_list->figure = figure;
-	new_list->octet = tet_to_char(figure);
 	new_list->width = last_x_y(figure, 'x') - first_x_y(figure, 'x') + 1;
 	new_list->height = last_x_y(figure, 'y') - first_x_y(figure, 'y') + 1;
-	new_list->y = 0;
-	new_list->x = 0;
 	new_list->next = NULL;
 	return (new_list);
 }
@@ -100,20 +97,5 @@ void			ft_list_alpha(t_tetramino *begin)
 		}
 		begin = begin->next;
 		++c;
-	}
-}
-
-void			ft_print_list(t_tetramino **begin)
-{
-	t_tetramino *temp;
-
-	temp = *begin;
-	while (temp)
-	{
-		ft_print_figure(temp->figure);
-		printf("w = %d\nh = %d\n", temp->width, temp->height);
-		print_octet(temp->octet);
-		printf("%d\n\n", temp->octet);
-		temp = temp->next;
 	}
 }
