@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 10:56:37 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 18:30:17 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:56:42 by pcredibl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		main(int argc, char **argv)
 {
 	t_tetramino		*list;
-	
+
 	if (argc != 2)
 	{
 		ft_putendl("usage: ./fillit source_file");

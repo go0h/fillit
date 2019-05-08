@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 21:15:19 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 18:33:41 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:06:40 by pcredibl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_tetra_square(t_tetramino *tet)
 {
 	int		side;
 	char	**map;
-	
+
 	map = NULL;
 	ft_list_alpha(tet);
 	//вычисляем для начала наименьший возможный квадрат	
@@ -39,7 +39,7 @@ int		ft_tetra_square(t_tetramino *tet)
 		}
 		//если не один вариант не подходит увеличиваем размер карты
 		ft_free_arr(map);
-		++side; 
+		++side;
 	}
 	return (1);
 }
@@ -79,7 +79,7 @@ int		ft_try_on_tet(char **map, char **figure, int y, int x)
 	int i;
 	int j;
 	int x_temp;
-	
+
 	i = 0;
 	x_temp = x;
 	while (figure[i])
@@ -90,7 +90,8 @@ int		ft_try_on_tet(char **map, char **figure, int y, int x)
 		x = x_temp;
 		while (figure[i][j] != '\0')
 		{
-			if (!map[y + i][x + j] || (map[y + i][x + j] != '.' && figure[i][j] != '.'))
+			if (!map[y + i][x + j] ||
+					(map[y + i][x + j] != '.' && figure[i][j] != '.'))
 				return (0);
 			++j;
 		}

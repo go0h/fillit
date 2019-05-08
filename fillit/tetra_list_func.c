@@ -6,7 +6,7 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/01 18:50:13 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/06 22:32:26 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:03:24 by pcredibl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_tetramino		*ft_newlist(char **figure)
 void			ft_listadd(t_tetramino **begin, t_tetramino *new)
 {
 	t_tetramino *temp;
+
 	if (new)
 	{
 		if (!*begin)
@@ -78,9 +79,9 @@ int				count_tetramino(t_tetramino *begin)
 
 void			ft_list_alpha(t_tetramino *begin)
 {
-	char c;
-	int i;
-	int j;
+	char		c;
+	int			i;
+	int			j;
 
 	c = 'A';
 	while (begin)
@@ -89,7 +90,7 @@ void			ft_list_alpha(t_tetramino *begin)
 		while (begin->figure[i])
 		{
 			j = 0;
-			while(begin->figure[i][j])
+			while (begin->figure[i][j])
 			{
 				if (begin->figure[i][j] == '#')
 					begin->figure[i][j] = c;

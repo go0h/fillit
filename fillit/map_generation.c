@@ -6,13 +6,13 @@
 /*   By: astripeb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:20:56 by astripeb          #+#    #+#             */
-/*   Updated: 2019/05/05 17:24:31 by astripeb         ###   ########.fr       */
+/*   Updated: 2019/05/08 14:59:13 by pcredibl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tetramino.h"
 
-int		ft_sqr(int	nbr)
+int		ft_sqr(int nbr)
 {
 	int		n;
 
@@ -52,7 +52,7 @@ void	ft_set_on_map(char **map, char **figure, int y, int x)
 	int i;
 	int j;
 	int	x_temp;
-	
+
 	i = 0;
 	x_temp = x;
 	while (map[y + i] && figure[i])
@@ -74,8 +74,8 @@ void	ft_remove_from_map(char **map, char **figure, int y, int x)
 	int i;
 	int j;
 	int	x_temp;
-	
-	x_temp = x;	
+
+	x_temp = x;
 	i = 0;
 	while (map[y + i] && figure[i])
 	{
