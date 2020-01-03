@@ -6,44 +6,59 @@
 #    By: astripeb <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:19:04 by astripeb          #+#    #+#              #
-#    Updated: 2019/05/09 14:09:55 by astripeb         ###   ########.fr        #
+#    Updated: 2020/01/03 15:59:56 by astripeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fillit
+NAME 			:= fillit
+LIBFT			:= libft
+SRC_DIR 		:= ./src
+INC_DIR			:= ./inc
+LIBFT_DIR 		:= ./libft
+OBJ_DIR 		:= ./obj
 
-CC = gcc
+CC 				:= gcc
+CFLAGS 			:= -Wall -Wextra -Werror
+LFLAGS 			:= -I $(INC_DIR) -I $(LIBFT_DIR)
 
-LIBFT_PATH = ./libft
-OBJ_PATH = ./obj
-SRC_PATH = ./
+LIB				:= -L $(LIBFT_DIR) -lft
 
-CFLAGS = -Wall -Wextra -Werror
-LFLAGS = -I . -I $(LIBFT_PATH)
+HEADERS			:= tetramino.h
 
-SOURCES =  main.c tetra_list_func.c map_generation.c validation.c\
-		   trimming.c algorithm.c
+SRCS			:= main.c tetra_list_func.c map_generation.c validation.c\
+				trimming.c algorithm.c
 
-OBJ = $(addprefix $(OBJ_PATH)/, $(SOURCES:.c=.o))
+OBJ 			:= $(SRCS:.c=.o)
 
-all: $(NAME)
+all: lib $(NAME)
 
-$(OBJ_PATH)/%.o:$(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
+vpath %.c $(SRC_DIR)
+vpath %.h $(INC_DIR)
+vpath %.o $(OBJ_DIR)
+vpath %.a $(LIBFT_DIR)
 
-$(NAME): lib $(OBJ)
-	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
+$(OBJ):%.o:%.c $(HEADERS) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(LFLAGS) -o $(OBJ_DIR)/$@ -c $<
+
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(CFLAGS) $(LFLAGS) $(addprefix $(OBJ_DIR)/, $(OBJ)) $(LIB) -o $@
 
 lib:
-	@make -C $(LIBFT_PATH)
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(OBJ_DIR):
+	mkdir -p $@
 
 clean:
-	@rm -rf $(OBJ_PATH)
-	@make -C $(LIBFT_PATH) clean
+	rm -rf $(OBJ_DIR)
+	$(MAKE) $@ -C $(LIBFT_DIR)
 
 fclean:
-	@rm -rf $(OBJ_PATH) $(NAME)
-	@make -C $(LIBFT_PATH) fclean
+	rm -rf $(OBJ_DIR) $(NAME)
+	$(MAKE) $@ -C $(LIBFT_DIR)
 
-re: fclean $(NAME)
+re: fclean all
+
+.SILENT: all clean fclean re $(NAME) $(OBJ_DIR) $(OBJ) lib
+
+.PHONY: all clean fclean re $(NAME) $(OBJ)
